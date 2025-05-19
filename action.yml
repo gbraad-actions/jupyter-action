@@ -1,0 +1,16 @@
+name: "Jupyter Notebook server"
+description: "Installs and runs Jupyter Notebook server for debugging purpose"
+author: "Gerard Braad <me@gbraad.nl>"
+runs:
+  using: 'composite'
+  steps:
+    - name: Install notebook
+      id: setup
+      shell: bash
+      run: |
+        pip install notebook
+    - name: Run notebook server
+      id: run
+      shell: bash
+      run: |
+        jupyter notebook --ip 0.0.0.0 --no-browser --IdentityProvider.token='' &
