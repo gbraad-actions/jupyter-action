@@ -1,6 +1,13 @@
 name: "Jupyter Notebook server"
 description: "Installs and runs Jupyter Notebook server for debugging purpose"
 author: "Gerard Braad <me@gbraad.nl>"
+
+inputs:
+  hangaround:
+    description: 'Run the hangaround step'
+    required: false
+    default: 'false'
+
 runs:
   using: 'composite'
   steps:
@@ -14,3 +21,9 @@ runs:
       shell: bash
       run: |
         jupyter notebook --ip 0.0.0.0 --no-browser --IdentityProvider.token='' &
+
+    - name: Hang around
+      if: ${{ inputs.hangaround == 'true' }}
+      shell: bash
+      run: |
+        sleep infinity
